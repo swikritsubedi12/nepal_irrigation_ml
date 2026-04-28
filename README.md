@@ -29,3 +29,15 @@ Create and activate a virtual environment, then install dependencies:
 
 ```bash
 pip install -r requirements.txt
+
+## Dataset
+The raw dataset files are not included in this repository due to GitHub file size limits.
+
+Please place the following files inside `data/raw/` before running the project:
+
+- `nepal_dataset_v2_train.csv`
+- `nepal_dataset_v2_test.csv`
+
+## Trained Model
+The saved trained model file is not included in this repository due to GitHub file size limits.  
+You can regenerate it by running the training scripts.
