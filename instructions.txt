@@ -1,0 +1,196 @@
+## Comprehensive Instructions for Successful Execution
+
+This project was developed in **Python** using **Jupyter Notebook** and modular Python scripts.  
+It predicts **crop-specific irrigation need levels in Nepal** as **Low, Medium, or High** using machine learning classification models.
+
+### 1. Project Requirements
+
+Before running the project, make sure the following are installed on your system:
+
+- Python 3.10 or later
+- pip
+- Jupyter Notebook or Jupyter Lab
+- Git (optional, if cloning from GitHub)
+
+### 2. Clone or Download the Project
+
+If using GitHub, clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
+cd YOUR_REPOSITORY_NAME
+
+If you downloaded the project as a ZIP file, extract it and open the folder in VS Code, Jupyter Notebook, or your preferred Python environment.
+
+3. Install Dependencies
+
+Install all required Python packages using:
+
+pip install -r requirements.txt
+4. Place the Dataset Files Correctly
+
+The raw dataset files are not included in the GitHub repository due to file size limitations.
+
+You must manually place the following files inside the folder:
+
+data/raw/
+
+Required files:
+
+nepal_dataset_v2_train.csv
+nepal_dataset_v2_test.csv
+
+So the folder structure should look like this:
+
+data/
+└── raw/
+    ├── nepal_dataset_v2_train.csv
+    └── nepal_dataset_v2_test.csv
+5. Recommended Project Structure
+
+The project is organized as follows:
+
+nepal-irrigation-ml/
+│
+├── data/
+│   └── raw/
+├── notebooks/
+│   └── 01_main_workflow.ipynb
+├── outputs/
+│   ├── figures/
+│   ├── metrics/
+│   ├── predictions/
+│   └── models/
+├── src/
+│   ├── compare_results.py
+│   ├── config.py
+│   ├── data_utils.py
+│   ├── evaluate.py
+│   ├── feature_importance.py
+│   ├── models.py
+│   ├── predict_test.py
+│   ├── preprocessing.py
+│   ├── run_baseline.py
+│   └── run_smote.py
+├── README.md
+├── requirements.txt
+└── .gitignore
+6. Run the Project Step by Step
+
+You can run the project either through the notebook or through the Python scripts.
+
+Option A: Run Using Jupyter Notebook
+
+Open Jupyter Notebook:
+
+jupyter notebook
+
+Then open:
+
+notebooks/01_main_workflow.ipynb
+
+Run the notebook cells in order.
+
+This notebook demonstrates:
+
+data loading
+data inspection
+preprocessing
+feature engineering
+model training
+baseline evaluation
+SMOTE evaluation
+model comparison
+visualization of outputs
+Option B: Run Using Python Scripts
+Step 1: Run baseline models
+python -m src.run_baseline
+
+This script:
+
+loads the training data
+applies preprocessing and feature engineering
+trains Logistic Regression, Decision Tree, and Random Forest
+evaluates them on the validation set
+saves reports and confusion matrices in outputs/
+Step 2: Run SMOTE-based models
+python -m src.run_smote
+
+This script:
+
+applies SMOTE-based class imbalance handling
+retrains the same three models
+evaluates them again
+saves reports and results in outputs/
+Step 3: Compare baseline and SMOTE results
+python -m src.compare_results
+
+This script:
+
+combines baseline and SMOTE results
+creates a comparison summary
+saves the final comparison CSV in:
+outputs/metrics/all_model_comparison.csv
+Step 4: Extract feature importance from the final model
+python -m src.feature_importance
+
+This script:
+
+loads the final Random Forest model
+extracts feature importances
+saves:
+outputs/metrics/top5_feature_importance.csv
+outputs/figures/top5_feature_importance.png
+Step 5: Generate final test predictions
+python -m src.predict_test
+
+This script:
+
+retrains the selected final model if required
+predicts irrigation need for the unseen test dataset
+saves predictions in:
+outputs/predictions/final_test_predictions.csv
+7. Output Files Generated
+
+After successful execution, the following outputs will be created:
+
+In outputs/figures/
+confusion matrices for baseline models
+confusion matrices for SMOTE models
+target class distribution figure
+top 5 feature importance figure
+In outputs/metrics/
+classification reports for each model
+baseline summary
+SMOTE summary
+combined model comparison
+top 5 feature importance CSV
+In outputs/predictions/
+final test predictions CSV
+In outputs/models/
+trained final Random Forest model file
+8. Final Selected Model
+
+Based on the comparative evaluation, the final selected model is:
+
+Baseline Random Forest
+
+This model achieved the best overall performance in terms of macro F1-score and class-wise balance.
+
+9. Notes for Successful Execution
+Make sure the dataset files are placed correctly before running the code.
+Do not rename any folders or files unless you also update the paths inside the Python scripts.
+Run the scripts in the correct order if you want all outputs to be generated properly.
+If the trained model file is missing, run the baseline training and prediction scripts again.
+If you are using Jupyter Notebook, run all cells from top to bottom in sequence.
+
+10. Summary of Execution Order
+
+For quick execution, use this order:
+
+pip install -r requirements.txt
+python -m src.run_baseline
+python -m src.run_smote
+python -m src.compare_results
+python -m src.feature_importance
+python -m src.predict_test
